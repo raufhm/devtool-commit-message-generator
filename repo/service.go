@@ -24,6 +24,7 @@ type CommitMessageGen struct {
 
 type CommitGen struct{}
 
+// New is a constructor that creates a new instance of CommitMessageGen
 func (c *CommitGen) New(branch, message string) *CommitMessageGen {
 	return &CommitMessageGen{
 		Branch:  branch,
@@ -31,6 +32,7 @@ func (c *CommitGen) New(branch, message string) *CommitMessageGen {
 	}
 }
 
+// GetCommitMessage prompts the user for input to get the commit message
 func (c *CommitGen) GetCommitMessage() string {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter commit message: ")
@@ -43,6 +45,7 @@ func (c *CommitGen) GetCommitMessage() string {
 	return input
 }
 
+// GetCurrentBranch gets the current branch of the Git repository
 func (c *CommitGen) GetCurrentBranch() string {
 	cmd := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD")
 	var out bytes.Buffer
@@ -65,6 +68,7 @@ func (c *CommitGen) GetCurrentBranch() string {
 	}
 }
 
+// CommitGen generates a new Git commit with the provided branch and message
 func (c *CommitGen) CommitGen(branch, message string) error {
 	var stdout, stderr bytes.Buffer
 	cmd := exec.Command("git", "commit", "-am", fmt.Sprintf("%s: %s", branch, message))
