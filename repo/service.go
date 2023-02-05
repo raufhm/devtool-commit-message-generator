@@ -73,5 +73,6 @@ func (c *CommitGen) CommitGen(branch, message string) error {
 	if err := cmd.Run(); err != nil {
 		return err
 	}
+	fmt.Println(stdout.String())
 	return nil
 }
