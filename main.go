@@ -7,10 +7,14 @@ import (
 
 func main() {
 	commitGen := &repo.CommitGen{}
-	commit := commitGen.Generate(commitGen.GetCurrentBranch(), commitGen.GetCommitMessage())
-	if err := commitGen.Commit(commit.Branch, commit.Message); err != nil {
+	commit := commitGen.New(
+		commitGen.GetCurrentBranch(),
+		commitGen.GetCommitMessage())
+
+	if err := commitGen.CommitGen(commit.Branch, commit.Message); err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("Commit successful!")
+
+	fmt.Println("CommitGen successful!")
 }

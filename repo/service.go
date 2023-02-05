@@ -24,7 +24,7 @@ type CommitMessageGen struct {
 
 type CommitGen struct{}
 
-func (c *CommitGen) Generate(branch, message string) *CommitMessageGen {
+func (c *CommitGen) New(branch, message string) *CommitMessageGen {
 	return &CommitMessageGen{
 		Branch:  branch,
 		Message: message,
@@ -65,7 +65,7 @@ func (c *CommitGen) GetCurrentBranch() string {
 	}
 }
 
-func (c *CommitGen) Commit(branch, message string) error {
+func (c *CommitGen) CommitGen(branch, message string) error {
 	var stdout, stderr bytes.Buffer
 	cmd := exec.Command("git", "commit", "-am", fmt.Sprintf("%s: %s", branch, message))
 	cmd.Stdout = &stdout
