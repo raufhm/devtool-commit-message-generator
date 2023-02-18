@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Building Docker image
+      - docker build .
+artifacts:
+  files:
+    - Dockerfile
+    - app/myapp
+
+docker:
+  image: my-docker-image
+  build:
+    context: .
